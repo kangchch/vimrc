@@ -42,11 +42,14 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'mbriggs/mark.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'vim-airline/vim-airline'
-" Plugin 'tmhedberg/SimpylFold'
-" Plugin 'vim-scripts/indentpython.vim'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
-"color
 Plugin 'darkburn'
+"Plugin 'vim-Syntastic/syntastic'
+"Plugin 'jiangmiao/auto-pairs'
+Plugin 'tell-k/vim-autopep8'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 "===============plugin and color list=============
@@ -132,8 +135,9 @@ au BufNewFile,BufRead *.py
             \ set autoindent |
             \ set fileformat=unix
 let python_highlight_all=1
+let g:pymode_options_max_line_length = 120
 "===============python PEP8===============
-
+autocmd FileType python noremap <buffer> <F9> :call Autopep8()<CR>
 "===============plugins config===============
 "======syntastic setting start======
 let g:syntastic_error_symbol='>>'
@@ -212,7 +216,8 @@ let g:NERDTreeWinPos="left"
 let g:NERDTreeWinSize=25
 let g:NERDTreeShowLineNumbers=1
 let g:neocomplcache_enable_at_startup = 1 
-nmap <F2> :NERDTree  <CR>
+"autocmd vimenter * NERDTree
+nmap <F2> :NERDTreeToggle<CR>
 "======nerdtree setting end===========
 
 "======The-NERD-Commenter setting start===========
@@ -339,7 +344,8 @@ let g:SimpylFold_docstring_preview=1
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0
 set completeopt=longest,menu
-let g:ycm_path_to_python_interpreter='/usr/local/bin/python'
+let g:ycm_path_to_python_interpreter='/usr/bin/python3.5'
+let g:ycm_python_binary_pat='/usr/bin/python3'
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments=1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
@@ -370,3 +376,5 @@ let g:doxygen_enhanced_color = 1
 "let g:load_doxygen_syntax = 1
 "===========DoxygenToolkit setting end===========
 "===============plugins config===============
+"let g:SuperTabDefaultCompletionType = "context"
+"let g:jedi#popup_on_dot=0
