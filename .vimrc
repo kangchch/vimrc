@@ -41,17 +41,17 @@ Plugin 'The-NERD-Commenter'
 Plugin 'grep.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'mbriggs/mark.vim'
+"不同颜色区分括号匹配
 Plugin 'kien/rainbow_parentheses.vim'
+"状态栏强化
 Plugin 'vim-airline/vim-airline'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'nvie/vim-flake8'
 Plugin 'darkburn'
-" Plugin 'vim-Syntastic/syntastic'
-" Plugin 'jiangmiao/auto-pairs'
+" Plugin 'nvie/vim-flake8'
 Plugin 'tell-k/vim-autopep8'
-" Plugin 'Valloric/YouCompleteMe'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'w0rp/ale'
 
 call vundle#end()
 "===============plugin and color list=============
@@ -133,7 +133,7 @@ au BufNewFile,BufRead *.py
             \ set tabstop=4 |
             \ set softtabstop=4 |
             \ set shiftwidth=4 |
-            " \ set textwidth=120 |
+            \ set textwidth=120 |
             \ set expandtab |
             \ set autoindent |
             \ set fileformat=unix
@@ -142,33 +142,6 @@ let g:pymode_options_max_line_length = 120
 "===============python PEP8===============
 autocmd FileType python noremap <buffer> <F9> :call Autopep8()<CR>
 "===============plugins config===============
-"======syntastic setting start======
-let g:syntastic_error_symbol='>>'
-let g:syntastic_warning_symbol='>'
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
-let g:syntastic_enable_highlighting=1
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_javascript_checkers = ['jsl', 'jshint']
-let g:syntastic_html_checkers=['tidy', 'jshint']
-
-highlight SyntasticErrorSign guifg=white guibg=black
-" to see error location list
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_loc_list_height = 5
-function! ToggleErrors()
-    let old_last_winnr = winnr('$')
-    lclose
-    if old_last_winnr == winnr('$')
-        " Nothing was closed, open syntastic error location panel
-        Errors
-    endif
-endfunction
-nnoremap <Leader>s :call ToggleErrors()<cr>
-" nnoremap <Leader>sn :lnext<cr>
-" nnoremap <Leader>sp :lprevious<cr>
-"======syntastic setting end======
 
 "======flake8 setting start======
 let g:pyflakes_use_quickfix = 1
@@ -191,6 +164,17 @@ let g:PyFlakeMaxLineLength = 100
 ""Visual-mode key command for PyFlakeAuto 
 let g:PyFlakeRangeCommand = 'Q' 
 "======flake8 setting end======
+"
+"===========ale setting start===========
+" ale settings
+"let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 1 
+" python checker
+let g:ale_fixers = {
+\   'python': ['pylint']
+\}
+"===========ale setting end===========
 
 "======taglist setting start===========
 let Tlist_Ctags_Cmd='/usr/bin/ctags'
