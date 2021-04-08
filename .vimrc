@@ -1,5 +1,6 @@
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
+
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
@@ -46,10 +47,11 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'darkburn'
-"Plugin 'vim-Syntastic/syntastic'
-"Plugin 'jiangmiao/auto-pairs'
+" Plugin 'vim-Syntastic/syntastic'
+" Plugin 'jiangmiao/auto-pairs'
 Plugin 'tell-k/vim-autopep8'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'
 
 call vundle#end()
 "===============plugin and color list=============
@@ -58,6 +60,7 @@ call vundle#end()
 "===============basic config======================
 filetype plugin indent on
 syntax on
+set mouse=a
 set number
 set autoindent
 set smartindent
@@ -344,7 +347,7 @@ let g:SimpylFold_docstring_preview=1
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0
 set completeopt=longest,menu
-let g:ycm_path_to_python_interpreter='/usr/bin/python3.5'
+let g:ycm_path_to_python_interpreter='/usr/bin/python3'
 let g:ycm_python_binary_pat='/usr/bin/python3'
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments=1
@@ -359,7 +362,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 "===========DoxygenToolkit setting start===========
 let g:DoxygenToolkit_briefTag_funcName = "yes"
 
-let g:DoxygenToolkit_commentType = "python"
+let g:DoxygenToolkit_commentType = "python3"
 " let g:DoxygenToolkit_briefTag_pre = "\\brief "
 " let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
 " let g:DoxygenToolkit_paramTag_pre = "\\param "
@@ -378,3 +381,4 @@ let g:doxygen_enhanced_color = 1
 "===============plugins config===============
 "let g:SuperTabDefaultCompletionType = "context"
 "let g:jedi#popup_on_dot=0
+let g:jedi#completions_command = "<C-N>"
