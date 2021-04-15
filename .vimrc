@@ -60,6 +60,7 @@ call vundle#end()
 "===============basic config======================
 filetype plugin indent on
 syntax on
+set cc=120
 set mouse=a
 set number
 set autoindent
@@ -82,7 +83,11 @@ colorscheme darkburn
 set backspace=indent,eol,start
 set expandtab
 set showmatch
-set nowrap
+" Set the right margin.
+set colorcolumn=81
+" " Automatically split words at the margin.
+set wrap
+" set nowrap
 set noerrorbells
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 "set termencoding=gb18030
@@ -93,6 +98,7 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set foldmethod=syntax
 set foldlevel=99
 set foldcolumn=0
+
 
 let mapleader=','
 
@@ -170,10 +176,33 @@ let g:PyFlakeRangeCommand = 'Q'
 "let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_open_list = 1 
+"<Leader>s触发/关闭语法检查
+" nmap <Leader>ce :ALEToggle<CR>
+"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
+nmap sp <Plug>(ale_previous_wrap)
+nmap sn <Plug>(ale_next_wrap)
 " python checker
 let g:ale_fixers = {
 \   'python': ['pylint']
 \}
+
+" let g:ale_sign_error = '◉'
+" let g:ale_sign_warning = '◉'
+" highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500 guibg=#F5F5F5
+" highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#ED6237 guibg=#F5F5F5
+let g:ale_warn_about_trailing_whitespace = 0
+let g:ale_maximum_file_size = 1024 * 1024
+let g:ale_completion_enabled = 1
+let g:ale_code_actions_enabled = 1
+let g:ale_set_balloons_legacy_echo = 1
+let g:ale_c_parse_compile_commands = 1
+
+" Options for different linters.
+let g:ale_python_mypy_ignore_invalid_syntax = 1
+let g:ale_python_mypy_options = '--incremental'
+let g:ale_typescript_tslint_ignore_empty_files = 1
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
 "===========ale setting end===========
 
 "======taglist setting start===========
